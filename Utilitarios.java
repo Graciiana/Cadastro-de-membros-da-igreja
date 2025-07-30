@@ -131,10 +131,12 @@ public class Utilitarios {
             System.out.println(listaMin);
         }
         System.out.println("_______________________________________");
+
         // Pesquisa
-        System.out.println("Deseja fazer uma pesquisa por data? Sim/Não ");
+        System.out.println("Deseja fazer alguma operação? digite eliminar/pesquisar");
         String pesquisa = teclado.nextLine();
-        if (pesquisa.equalsIgnoreCase("Sim")) {
+
+        if (pesquisa.equalsIgnoreCase("Pesquisar")) {
             System.out.println("Digite uma data no formato AAA-MM-DD:  ");
             String dataString = teclado.nextLine();
 
@@ -160,6 +162,30 @@ public class Utilitarios {
                 System.out.println("Data inválida. Use o formato AAAA-MM-DD.");
             }
         }
+        // Pesquisa
+        else if (pesquisa.equalsIgnoreCase("Eliminar")) {
+            System.out.println("_______________________________________");
+
+            System.out.print("Digite um nome a eliminar: ");
+            String nomeEliminar = teclado.nextLine();
+
+            Ministerios ministerioParaRemover = null;
+            for (Ministerios minis : ministerios) {
+                if (minis.getNome().equalsIgnoreCase(nomeEliminar)) {
+                    ministerioParaRemover = minis;
+                    break;
+                }
+            }
+
+            if (ministerioParaRemover != null) {
+                ministerios.remove(ministerioParaRemover);
+                salvarMinisteriosEmArquivo();
+                System.out.println("Ministério removido com sucesso.");
+            } else {
+                System.out.println("Ministério não encontrado.");
+            }
+        }
+       
     }
 
     // Salvar membros
