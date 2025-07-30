@@ -10,6 +10,6 @@ public class Ministerios extends Cadastro {
   @Override
     public String toString(){
       super.toString();
-      return super.toString()+ " descrição do ministério: "+descricao;
+      return super.toString()+ " ,descrição do ministério: "+descricao;
   }
 }

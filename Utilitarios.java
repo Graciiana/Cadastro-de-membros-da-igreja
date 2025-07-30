@@ -39,11 +39,11 @@ public class Utilitarios {
                     System.out.println("Cargo inválido. Tente novamente. (Ex: Cantor, Intercessor, protocolo)");
                 }
             } while (!encontrado);
+             // Instanciar membro e adicionar no ArrayList
+                Membros cadastro = new Membros(nome, cargo);
+                membros.add(cadastro);
         }
-
-        // Instanciar membro e adicionar no ArrayList
-        Membros cadastro = new Membros(nome, cargo);
-        membros.add(cadastro);
+  
         System.out.println("Dados cadastrados com sucesso");
 
         System.out.println("Queres continuar fazendo o cadastro?, digite Sim/Não.");
@@ -64,14 +64,17 @@ public class Utilitarios {
         System.out.println("------ Menu Ministerios----------");
 
         for (int i = 1; i <= 2; i++) {
-            System.out.print("Ministério: ");
+            System.out.print(i+" º "+ "Ministério: ");
             nomeMinisterio = teclado.nextLine();
             System.out.print("Descrição: ");
             descricaoMininsterio = teclado.nextLine();
+
+            //Instanciando a Classe Ministerios
+            Ministerios min = new Ministerios(nomeMinisterio, descricaoMininsterio);
+            ministerios.add(min);
         }
-        Ministerios min = new Ministerios(nomeMinisterio, descricaoMininsterio);
-        ministerios.add(min);
-        System.out.println("Cadastrado com sucesso");
+      
+        System.out.println("Cadasto feito com sucesso");
         teclado.nextLine();
     }
 
@@ -114,6 +117,47 @@ public class Utilitarios {
             }
         }
     }
+
+
+    //Ministerios
+    public static void lista_Ministerios() {
+        teclado.nextLine();
+        System.out.println("------ Lista dos Ministerios--------");
+        for (Ministerios listaMin : ministerios) {
+            System.out.println(listaMin);
+        }
+        System.out.println("_______________________________________");
+        // Pesquisa
+        System.out.println("Deseja fazer uma pesquisa por data? Sim/Não ");
+        String pesquisa = teclado.nextLine();
+        if (pesquisa.equalsIgnoreCase("Sim")) {
+            System.out.println("Digite uma data no formato AAA-MM-DD:  ");
+            String dataString = teclado.nextLine();
+
+            try {
+                LocalDate dataPesquisa = LocalDate.parse(dataString);
+
+                System.out.println("------- Ministerios com data: " + dataPesquisa + " ----------\n");
+                boolean encontrou = false;
+
+                for (Ministerios mini : ministerios) {
+
+                    // Compara a data do sistema com a data digitada pelo usuario
+                    if (mini.getDataCadastro().equals(dataPesquisa)) {
+                        System.out.println(mini);
+                        encontrou = true;
+                    }
+                }
+                if (!encontrou) {
+                    System.out.println("Nenhum ministerio encontrado nessa data.");
+                }
+
+            } catch (Exception e) {
+                System.out.println("Data inválida. Use o formato AAAA-MM-DD.");
+            }
+        }
+    }
+
 
     // Método para limpeza dos dados digitados"
 

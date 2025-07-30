@@ -33,7 +33,10 @@ public class Main {
                     teclado.nextLine();
                     Utilitarios.limpar();
                     break;
-
+                case 4:
+                    Utilitarios.lista_Ministerios();
+                    Utilitarios.limpar();
+                    break;
                 case 0:
                     cadastro = false;
                     Utilitarios.limpar();
