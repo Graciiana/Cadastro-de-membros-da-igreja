@@ -13,8 +13,16 @@ public class Cadastro{
     return nome;
   }
 
-  public LocalDate getDataCadastro(){
+   public LocalDate getDataCadastro(){
     return dataCadastro;
+  }
+
+  public void setDataCadastro(LocalDate data){
+    this.dataCadastro=data;
+  }
+
+   public void setNome(String nome){
+    this.nome=nome;
   }
   
   public String toString(){

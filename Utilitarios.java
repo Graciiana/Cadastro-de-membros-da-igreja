@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,11 +43,12 @@ public class Utilitarios {
                     System.out.println("Cargo inválido. Tente novamente. (Ex: Cantor, Intercessor, protocolo)");
                 }
             } while (!encontrado);
-             // Instanciar membro e adicionar no ArrayList
-                Membros cadastro = new Membros(nome, cargo);
-                membros.add(cadastro);
+            // Instanciar membro e adicionar no ArrayList
+            Membros cadastro = new Membros(nome, cargo);
+            membros.add(cadastro);
         }
-  
+
+        salvarMembrosEmArquivo();
         System.out.println("Dados cadastrados com sucesso");
 
         System.out.println("Queres continuar fazendo o cadastro?, digite Sim/Não.");
@@ -64,16 +69,16 @@ public class Utilitarios {
         System.out.println("------ Menu Ministerios----------");
 
         for (int i = 1; i <= 2; i++) {
-            System.out.print(i+" º "+ "Ministério: ");
+            System.out.print(i + " º " + "Ministério: ");
             nomeMinisterio = teclado.nextLine();
             System.out.print("Descrição: ");
             descricaoMininsterio = teclado.nextLine();
 
-            //Instanciando a Classe Ministerios
+            // Instanciando a Classe Ministerios
             Ministerios min = new Ministerios(nomeMinisterio, descricaoMininsterio);
             ministerios.add(min);
         }
-      
+        salvarMinisteriosEmArquivo();
         System.out.println("Cadasto feito com sucesso");
         teclado.nextLine();
     }
@@ -118,8 +123,7 @@ public class Utilitarios {
         }
     }
 
-
-    //Ministerios
+    // Ministerios
     public static void lista_Ministerios() {
         teclado.nextLine();
         System.out.println("------ Lista dos Ministerios--------");
@@ -158,6 +162,63 @@ public class Utilitarios {
         }
     }
 
+    // Salvar membros
+    public static void salvarMembrosEmArquivo() {
+        try (PrintWriter writer = new PrintWriter("membros.txt")) {
+            for (Membros m : membros) {
+                writer.println(m.getNome() + ";" + m.getCargo() + ";" + m.getDataCadastro());
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar membros: " + e.getMessage());
+        }
+    }
+
+    // Carregar membros
+    public static void carregarMembrosDoArquivo() {
+        membros.clear();
+        try (BufferedReader reader = new BufferedReader(new FileReader("membros.txt"))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] partes = linha.split(";");
+                if (partes.length == 3) {
+                    Membros membro = new Membros(partes[0], partes[1]);
+                    membro.setDataCadastro(LocalDate.parse(partes[2]));
+                    membros.add(membro);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar membros: " + e.getMessage());
+        }
+    }
+
+    // Salvar ministerios
+    public static void salvarMinisteriosEmArquivo() {
+        try (PrintWriter writer = new PrintWriter("ministerios.txt")) {
+            for (Ministerios m : ministerios) {
+                writer.println(m.getNome() + ";" + m.getDescricao() + ";" + m.getDataCadastro());
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao salvar ministerios: " + e.getMessage());
+        }
+    }
+
+    // Carregar ministerios
+    public static void carregarMinisteriosDoArquivo() {
+        ministerios.clear();
+        try (BufferedReader reader = new BufferedReader(new FileReader("ministerios.txt"))) {
+            String linha;
+            while ((linha = reader.readLine()) != null) {
+                String[] partes = linha.split(";");
+                if (partes.length == 3) {
+                    Ministerios minist = new Ministerios(partes[0], partes[1]);
+                    minist.setDataCadastro(LocalDate.parse(partes[2]));
+                    ministerios.add(minist);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar ministerios: " + e.getMessage());
+        }
+    }
 
     // Método para limpeza dos dados digitados"
 

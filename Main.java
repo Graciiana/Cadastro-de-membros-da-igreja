@@ -4,6 +4,12 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+
+        //Iniciando o carregamento dos membros cadastrados
+        Utilitarios.carregarMembrosDoArquivo();
+        Utilitarios.carregarMinisteriosDoArquivo();
+        Utilitarios.limpar();
+
         boolean cadastro = true;
         Scanner teclado = new Scanner(System.in);
 
