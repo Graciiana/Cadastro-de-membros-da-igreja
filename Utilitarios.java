@@ -15,7 +15,7 @@ public class Utilitarios {
     public static void cadastraMembros() {
         System.out.println("______Menu Cadastro_______");
         teclado.nextLine();
-        String[] cargos = { "Cantor", "Intercessor", "protocolo" };
+        String[] cargos = { "Cantor", "Cantora", "Intercessor", "protocolo" };
         System.out.print("Digite o número de pessoas a cadastrar: ");
         int quantidade = teclado.nextInt();
         teclado.nextLine();
@@ -41,6 +41,7 @@ public class Utilitarios {
             } while (!encontrado);
         }
 
+        // Instanciar membro e adicionar no ArrayList
         Membros cadastro = new Membros(nome, cargo);
         membros.add(cadastro);
         System.out.println("Dados cadastrados com sucesso");
@@ -76,28 +77,30 @@ public class Utilitarios {
 
     // Metódos para listar os dados do ministerio e dos membros
 
-    public static void lista_Memboros() {
+    public static void lista_Membros() {
         teclado.nextLine();
         System.out.println("------ Lista dos membros--------");
         for (Membros listaMem : membros) {
-            System.out.println(membros);
+            System.out.println(listaMem);
         }
+        System.out.println("_______________________________________");
         // Pesquisa
         System.out.println("Deseja fazer uma pesquisa por data? Sim/Não ");
         String pesquisa = teclado.nextLine();
         if (pesquisa.equalsIgnoreCase("Sim")) {
             System.out.println("Digite uma data no formato AAA-MM-DD:  ");
             String dataString = teclado.nextLine();
-            
 
             try {
                 LocalDate dataPesquisa = LocalDate.parse(dataString);
-                limpar();
-                System.out.println("------- Membros com data: " + dataPesquisa + " ----------");
+
+                System.out.println("------- Membros com data: " + dataPesquisa + " ----------\n");
                 boolean encontrou = false;
+
                 for (Membros membros2 : membros) {
+
                     // Compara a data do sistema com a data digitada pelo usuario
-                    if (membros2.getDataCadastro().equals(pesquisa)) {
+                    if (membros2.getDataCadastro().equals(dataPesquisa)) {
                         System.out.println(membros2);
                         encontrou = true;
                     }
@@ -112,7 +115,7 @@ public class Utilitarios {
         }
     }
 
-    // Método para limpeza dos dados digitados
+    // Método para limpeza dos dados digitados"
 
     public static void limpar() {
         System.out.println("\033[H\033[2J");

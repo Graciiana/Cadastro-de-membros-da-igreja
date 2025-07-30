@@ -29,13 +29,16 @@ public class Main {
                     Utilitarios.limpar();
                     break;
                 case 3:
-                    Utilitarios.lista_Memboros();
-                    
+                    Utilitarios.lista_Membros();
+                    teclado.nextLine();
+                    Utilitarios.limpar();
                     break;
 
                 case 0:
                     cadastro = false;
+                    Utilitarios.limpar();
                     break;
+                    
             }
         }
     }
