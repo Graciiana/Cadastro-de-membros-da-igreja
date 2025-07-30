@@ -162,7 +162,7 @@ public class Utilitarios {
                 System.out.println("Data inválida. Use o formato AAAA-MM-DD.");
             }
         }
-        // Pesquisa
+        // Eliminar
         else if (pesquisa.equalsIgnoreCase("Eliminar")) {
             System.out.println("_______________________________________");
 

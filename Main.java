@@ -45,11 +45,10 @@ public class Main {
                     break;
                 case 0:
                     cadastro = false;
+                    teclado.nextLine();
                     Utilitarios.limpar();
-                    break;
-                    
+                    break;    
             }
         }
     }
-
 }
