@@ -130,13 +130,15 @@ public class Utilitarios {
         for (Ministerios listaMin : ministerios) {
             System.out.println(listaMin);
         }
-        System.out.println("_______________________________________");
+        System.out.println("________________________________________________________________________");
 
         // Pesquisa
-        System.out.println("Deseja fazer alguma operação? digite eliminar/pesquisar");
-        String pesquisa = teclado.nextLine();
+        System.out.println("Deseja fazer alguma operação? digite (0)eliminar/(1)pesquisar/(2)editar");
+        int pesquisa = teclado.nextInt();
+        teclado.nextLine();
 
-        if (pesquisa.equalsIgnoreCase("Pesquisar")) {
+        if (pesquisa == 1) {
+
             System.out.println("Digite uma data no formato AAA-MM-DD:  ");
             String dataString = teclado.nextLine();
 
@@ -163,7 +165,8 @@ public class Utilitarios {
             }
         }
         // Eliminar
-        else if (pesquisa.equalsIgnoreCase("Eliminar")) {
+        else if (pesquisa == 0) {
+            teclado.nextLine();
             System.out.println("_______________________________________");
 
             System.out.print("Digite um nome a eliminar: ");
@@ -185,7 +188,43 @@ public class Utilitarios {
                 System.out.println("Ministério não encontrado.");
             }
         }
-       
+        // Editar
+        else if (pesquisa == 2) {
+            System.out.println("_____________________________________");
+            System.out.print("Escolha o nome do ministerio que queres mudar: ");
+            String nome_a_mudar = teclado.nextLine();
+
+            boolean nomeEncntrado = false;
+
+            for (Ministerios mini2 : ministerios) {
+                if (mini2.getNome().equalsIgnoreCase(nome_a_mudar)) {
+                    System.out.print("Digite um novo nome: ");
+                    String novoNome = teclado.nextLine();
+
+                    System.out.print("Descrição: ");
+                    String descricao = teclado.nextLine();
+
+                    mini2.setNome(novoNome);
+                    mini2.setDescricao(descricao);
+                    // Adicionando na lista
+                    System.out.println("Dados editados com sucesso");
+                    for (int i = 0; i < 50; i++) {
+                        System.out.println();
+                    }
+
+                    System.out.println("Dados editados: \n" + mini2);
+                    salvarMembrosEmArquivo();
+
+                    nomeEncntrado = true;
+                    break;
+                }
+            }
+            if (!nomeEncntrado) {
+                System.out.println("Nome não encontrado.");
+            }
+        } else {
+            System.out.println("Opção inválida");
+        }
     }
 
     // Salvar membros

@@ -27,8 +27,10 @@ public class Main {
             switch (opcao) {
                 case 1:
                     Utilitarios.cadastraMembros();
-                    teclado.nextLine();
-                    Utilitarios.limpar();
+                    for (int i = 0; i < 50; i++) {
+                        System.out.println();
+                    }
+                    //Utilitarios.limpar();
                     break;
                 case 2:
                     Utilitarios.ministeriosIgreja();

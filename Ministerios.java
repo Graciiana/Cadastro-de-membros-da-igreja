@@ -1,5 +1,6 @@
 import org.xml.sax.SAXNotRecognizedException;
 
+
 public class Ministerios extends Cadastro {
   String descricao;
 
@@ -11,6 +12,11 @@ public class Ministerios extends Cadastro {
   public String getDescricao(){
     return descricao;
   }
+
+  public void setDescricao(String descricao){
+    this.descricao=descricao;
+  }
+
 
   @Override
   public String toString() {
